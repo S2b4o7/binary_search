@@ -1,0 +1,51 @@
+class Solution {
+public:
+
+int rbs(int start,int end,vector<int>&nums,int target)
+    {
+        if(start>end) return -1;
+        int mid=(start+end)/2;
+        if(nums[mid]==target)
+        return max(mid,rbs(mid+1,end,nums,target));
+        else if(nums[mid]<target)
+        {
+            return rbs(mid+1,end,nums,target);
+        }
+        else
+        {
+             return rbs(start,mid-1,nums,target);
+        }
+    }
+
+    int lbs(int start,int end,vector<int>&nums,int target)
+    {
+        if(start>end) return nums.size();
+        int mid=(start+end)/2;
+        if(nums[mid]==target)
+        return min(mid,lbs(start,mid-1,nums,target));
+        else if(nums[mid]<target)
+        {
+            return lbs(mid+1,end,nums,target);
+        }
+        else
+        {
+             return lbs(start,mid-1,nums,target);
+        }
+    }
+
+
+
+
+
+
+    vector<int> searchRange(vector<int>& nums, int target) {
+
+        vector<int>ans;
+        int left_index=lbs(0,nums.size()-1,nums,target);
+        if(left_index==nums.size()){ans.push_back(-1);}
+        else ans.push_back(left_index);
+        ans.push_back(rbs(0,nums.size()-1,nums,target));
+        return ans;
+        
+    }
+};
