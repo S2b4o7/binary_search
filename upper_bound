@@ -1,0 +1,19 @@
+int bs(int start,int end,int target,vector<int>arr)
+{
+	if(start>end)
+	{
+		return start;
+	}
+	int mid=(start+end)/2;
+
+	
+	if(arr[mid]<=target)
+	{
+		return bs(mid+1,end,target,arr);
+	}
+	else
+	{
+		return bs(start,mid-1,target,arr);
+	}
+
+}
